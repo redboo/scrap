@@ -1,0 +1,4 @@
+pytablewriter
+requests
+beautifulsoup4
+lxml
