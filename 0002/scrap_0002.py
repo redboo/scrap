@@ -100,11 +100,17 @@ def get_data(url, cur_page: int = 1, projects_data_list: list = []):
         return
 
 
-# get_data("https://ru.startup.network/startups/")
-get_data(
-    "https://ru.startup.network/local/ajax/projects.php?\
-data[action]=getNextPageProjects\
-&data[controls][pagePrevNum]=first\
-&data[controls][goal]=invest\
-&data[controls][curDir]=%2Fstartups%2F\
-&data[controls][goalSubType]=startups")
+def main():
+
+    # get_data("https://ru.startup.network/startups/")
+    get_data(
+        "https://ru.startup.network/local/ajax/projects.php?\
+    data[action]=getNextPageProjects\
+    &data[controls][pagePrevNum]=first\
+    &data[controls][goal]=invest\
+    &data[controls][curDir]=%2Fstartups%2F\
+    &data[controls][goalSubType]=startups")
+
+
+if __name__ == "__main__":
+    main()
