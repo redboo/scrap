@@ -1,22 +1,22 @@
 import json
 import random
 import time
-import requests
-from bs4 import BeautifulSoup as bs
-from pathlib import Path
 from os import sep as SEP
+from pathlib import Path
 
+import requests
+from bs4 import BeautifulSoup
 
 path = str(Path(__file__).parent.resolve())
 
-data_dir = path + SEP + 'data'
+data_dir = path + SEP + "data" + SEP
 Path(data_dir).mkdir(parents=True, exist_ok=True)
 
-projects_dir = data_dir + SEP + 'projects'
+projects_dir = data_dir + "projects" + SEP
 Path(projects_dir).mkdir(parents=True, exist_ok=True)
 
-index_file = data_dir + SEP + 'index.html'
-project_data_file = data_dir + SEP + 'projects_data.json'
+index_file = data_dir + "index.html"
+project_data_file = data_dir + "projects_data.json"
 
 
 def get_data(url, cur_page: int = 1, projects_data_list: list = []):
@@ -26,59 +26,59 @@ def get_data(url, cur_page: int = 1, projects_data_list: list = []):
 
     req = requests.get(url + f"&data[controls][pageNum]={cur_page}", headers=headers)
     json_response = json.loads(req.text)
-    next_page = json_response['nextPage']
-    page_count = json_response['pageCount']
+    next_page = json_response["nextPage"]
+    page_count = json_response["pageCount"]
 
     if cur_page == 1:
         print(f"Всего итераций: #{page_count}")
 
     with open(index_file, 'w') as f:
-        f.write(json_response['items'])
+        f.write(json_response["items"])
 
     with open(index_file) as f:
         src = f.read()
 
-    soup = bs(src, 'lxml')
-    projects = soup.find('body').find_all('a', class_="projects_list_b", recursive=False)
+    soup = BeautifulSoup(src, 'lxml')
+    projects = soup.find('body').find_all("a", class_="projects_list_b", recursive=False)
 
-    project_urls = [project.get('href') for project in projects]
+    project_urls = [project.get("href") for project in projects]
 
     for project_url in project_urls:
         time.sleep(random.randrange(2, 4))
         project_req = requests.get(project_url, headers=headers)
-        project_uid_html = project_url.split('/')[-1]
-        project_file = projects_dir + SEP + project_uid_html
+        project_uid_html = project_url.split("/")[-1]
+        project_file = projects_dir + project_uid_html
 
-        with open(project_file, 'w') as f:
+        with open(project_file, "w") as f:
             f.write(project_req.text)
 
         with open(project_file) as f:
             project_src = f.read()
 
-        soup = bs(project_src, 'lxml')
+        soup = BeautifulSoup(project_src, "lxml")
         project_data = soup.find(id='detail-content')
 
         try:
-            project_logo = project_data.find(id='big_photo_view').find('img').get('src')
+            project_logo = project_data.find(id="big_photo_view").find("img").get("src")
         except Exception:
-            project_logo = 'No project logo'
+            project_logo = "No project logo"
 
         try:
-            project_name = project_data.find('h1').text
+            project_name = project_data.find("h1").text
         except Exception:
-            project_name = 'No project name'
+            project_name = "No project name"
 
         try:
             project_description_raw = project_data.find('div', class_="main_d").text.strip().replace("\n\n", '\n').replace('\xa0', ' ').splitlines()
             project_short_description = [line.strip() for line in project_description_raw]
             project_short_description = '\n'.join(project_short_description)
         except Exception:
-            project_short_description = 'No project short description'
+            project_short_description = "No project short description"
 
         try:
-            project_full_description = project_data.find(id="IDEA").find('div', class_="i_d").text.strip()
+            project_full_description = project_data.find(id="IDEA").find("div", class_="i_d").text.strip()
         except Exception:
-            project_full_description = 'No project full description'
+            project_full_description = "No project full description"
 
         projects_data_list.append(
             {
@@ -89,12 +89,12 @@ def get_data(url, cur_page: int = 1, projects_data_list: list = []):
             }
         )
 
-    if not next_page == 'last':
+    if not next_page == "last":
         print(f"Итерация #{cur_page} завершена, осталось итераций #{page_count - cur_page}")
         time.sleep(random.randrange(2, 4))
         get_data(url, next_page, projects_data_list)
     else:
-        with open(project_data_file, 'a') as f:
+        with open(project_data_file, "a") as f:
             json.dump(projects_data_list, f, indent=4, ensure_ascii=False)
         print("Сбор данных завершен")
         return

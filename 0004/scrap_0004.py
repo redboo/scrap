@@ -2,7 +2,6 @@ import json
 from os import sep as SEP
 from pathlib import Path
 
-import lxml
 import requests
 from bs4 import BeautifulSoup
 
