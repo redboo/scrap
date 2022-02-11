@@ -1,4 +1,4 @@
-# Scrap 0005 Hotels links
+# Scrap 0006 Hotels links
 
 Print hotels links. Get data with two ways: BeautifulSoup and Selenium
 
