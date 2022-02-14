@@ -1,4 +1,4 @@
-# Scrap 0007 Casio watches
+# Scrap 0007 Casio watches data to JSON, CSV
 
 Get data from html and save to JSON, CSV files.
 

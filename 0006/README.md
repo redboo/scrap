@@ -1,6 +1,6 @@
-# Scrap 0006 Hotels links
+# Scrap 0006 Print hotels links
 
-Print hotels links. Get data with two ways: BeautifulSoup and Selenium
+Get data with two ways: BeautifulSoup and Selenium
 
 Used:
 
