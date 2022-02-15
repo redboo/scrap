@@ -10,6 +10,7 @@ Library of my scraping:
 * [0006 Print hotels links](./0006/)
 * [0007 Casio watches data to JSON, CSV](./0007/)
 * [0008 Car tires to JSON](./0008/)
+* [0009 Books data to CSV, JSON](./0009/)
 
 ---
 
