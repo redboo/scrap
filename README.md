@@ -11,6 +11,8 @@ Library of my scraping:
 * [0007 Casio watches data to JSON, CSV](./0007/)
 * [0008 Car tires to JSON](./0008/)
 * [0009 Books data to CSV, JSON + Async version](./0009/)
+* [0010 Scrapping error handling](./0010/)
+* [0011 Lyrics. SSL](./0011/)
 
 ---
 
