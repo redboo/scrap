@@ -1,6 +1,6 @@
 # Scrap 0011 Lyrics. SSL
 
-Get data from html and save to TXT file with SSL.
+Get data with SSL and save to TXT file.
 
 Used:
 
