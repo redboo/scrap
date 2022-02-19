@@ -116,7 +116,7 @@ def get_data():
                 ))
 
         print(f'Обработана страница {page}/{pages_count}')
-        time.sleep(1)
+        # time.sleep(1)
 
     with open(f'{data_dir}/{filename}.json', 'w') as f:
         json.dump(books_data, f, indent=4, ensure_ascii=False)
