@@ -1,16 +1,14 @@
 import json
-from os import sep as SEP
-from pathlib import Path
+from os import makedirs, path
 
 import requests
 from bs4 import BeautifulSoup
 
 from proxy_auth import proxies
 
-path = str(Path(__file__).parent.resolve())
-
-data_dir = path + SEP + "data"
-Path(data_dir).mkdir(parents=True, exist_ok=True)
+directory = path.dirname(__file__)
+download_dir = f'{directory}/downloads'
+makedirs(download_dir, exist_ok=True)
 
 domain = "https://www.skiddle.com"
 url = domain + "/festivals/search/"
@@ -28,10 +26,10 @@ for i in range(0, 264, 24):
     json_data = json.loads(req.text)
     html_response = json_data["html"]
 
-    with open(f"{data_dir}{SEP}index_{i}.html", "w") as f:
+    with open(f"{download_dir}/index_{i}.html", "w") as f:
         f.write(html_response)
 
-    with open(f"{data_dir}{SEP}index_{i}.html") as f:
+    with open(f"{download_dir}/index_{i}.html") as f:
         src = f.read()
 
     soup = BeautifulSoup(src, "lxml")
@@ -78,5 +76,5 @@ for count, url in enumerate(fests_urls_list, start=1):
         print(e)
         print("Damn... There was an error...")
 
-with open(data_dir + SEP + "fest_list.json", "w") as f:
+with open(f"{download_dir}/fest_list.json", "w") as f:
     json.dump(fest_list_result, f, indent=4, ensure_ascii=False)
