@@ -14,6 +14,7 @@ Library of my scraping:
 * [0010 Scrapping error handling](./0010/)
 * [0011 Lyrics. SSL](./0011/)
 * [0012 Asynchronous parser](./0012/)
+* [0013 Parser with multiprocessing and proxydl library](./0013/)
 
 ---
 
