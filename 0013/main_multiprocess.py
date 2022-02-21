@@ -46,11 +46,11 @@ def main():
     proxy_list = get_proxy_list()
 
     # with multiprocessing.Pool(multiprocessing.cpu_count()) as process:
-    with multiprocessing.Pool(20) as process:
+    with multiprocessing.Pool(16) as process:
         process.map(handler, proxy_list)
 
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     main()
-    logging.info('\n[Time taken]: ', time() - start_time)
+    logging.info(f'[Time taken]: {time() - start_time}')

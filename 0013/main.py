@@ -46,4 +46,4 @@ def main():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     main()
-    logging.info('\n[Time taken]: ', time() - start_time)
+    logging.info(f'\n[Time taken]: {time() - start_time}')
