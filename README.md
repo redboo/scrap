@@ -16,6 +16,7 @@ Library of my scraping:
 * [0012 Asynchronous parser](./0012/)
 * [0013 Parser with multiprocessing and proxydl library](./0013/)
 * [0014 Parser with JSON configuration](./0014/)
+* [0015 Landingfolio.com parsers](./0015/)
 
 ---
 
